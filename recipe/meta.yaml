@@ -11,18 +11,18 @@ source:
   sha256: ea2725c6f38ddd8f3677c9b0ce8da8f52fe69e34aa85c01fb98074dc4e3458bc
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
 
 requirements:
   build:
     - toolchain
     - libtool
-    - gmp
-    - mpfr
+    - gmp >=5.0.1,<7
+    - mpfr 3.*
   run:
-    - gmp
-    - mpfr
+    - gmp >=5.0.1,<7
+    - mpfr 3.*
 
 test:
   commands:
