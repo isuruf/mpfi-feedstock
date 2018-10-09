@@ -1,4 +1,4 @@
-{% set version = "1.5.3" %}
+{% set version = "1.5.4" %}
 {% set name = "mpfi" %}
 
 package:
@@ -7,11 +7,11 @@ package:
 
 source:
   fn: {{ name }}-{{ version }}.tar.gz
-  url: https://gforge.inria.fr/frs/download.php/latestfile/181/{{ name }}-{{ version }}.tar.gz
-  sha256: beed2003fdbedf590e8dd6edb4f2321e609e329df99ed4139cd66d7ebbc41240
+  url: https://gforge.inria.fr/frs/download.php/file/37331/mpfi-{{ version }}.tar.bz2
+  sha256: 2383d457b208c6cd3cf2e66b69c4ce47477b2a0db31fbec0cd4b1ebaa247192f
 
 build:
-  number: 1
+  number: 1001
   skip: true  # [win]
   run_exports:
     - {{ pin_subpackage('mpfi', max_pin='x.x') }}
@@ -20,9 +20,11 @@ requirements:
   build:
     - {{ compiler('c') }}
     - libtool
+
   host:
     - gmp
     - mpfr
+
   run:
     - gmp
     - mpfr
@@ -31,16 +33,16 @@ test:
   commands:
     - test -f ${PREFIX}/include/{{ name }}.h
     - test -f ${PREFIX}/lib/lib{{ name }}.a
-    - test -f ${PREFIX}/lib/lib{{ name }}.dylib  # [osx]
-    - test -f ${PREFIX}/lib/lib{{ name }}.so     # [linux]
+    - test -f ${PREFIX}/lib/lib{{ name }}${SHLIB_EXT}  # [unix]
 
 about:
   home: http://mpfi.gforge.inria.fr/
   license: LGPL 3
-  license_file: {{ SRC_DIR }}/COPYING
+  license_file: COPYING
   summary: A multiple precision interval arithmetic library based on MPFR
   dev_url: https://gforge.inria.fr/scm/?group_id=157
 
 extra:
   recipe-maintainers:
     - isuruf
+    - marcelotrevisani
